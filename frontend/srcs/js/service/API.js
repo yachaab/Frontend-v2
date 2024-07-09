@@ -4,65 +4,79 @@ const API = {
 	friendshipEndpoint: "http://127.0.0.1:8000/api/friendship",
 
 	// ADD HERE ALL THE OTHER API FUNCTIONS
-	login: async (userData) => {
-		return await API.makePostRequest(
-			API.authEndpoint + "logins/",
-			userData
-		);
+	commonPostFunc: async (endPoint, userData ) => {
+		try
+		{
+			const res = await API.makePostRequest( endPoint, userData );
+			return res;
+		}
+		catch ( err )
+		{
+			console.log("Error: ", err);
+		}
 	},
 
-	isLogedIn: async () => {
-		return await API.makeGetRequest(API.authEndpoint + "usercheck/");
+	commonGetFunc: async ( endPoint ) => {
+		try
+		{
+			const res = await API.makeGetRequest( endPoint );
+			return res;
+		}
+		catch ( err )
+		{
+			console.log("Error: ", err);
+		}
 	},
 
-	register: async (userData) => {
-		return await API.makePostRequest(
-			API.authEndpoint + "signups/",
-			userData
-		);
+	// Function Make a POST request
+	login: (userData) => {
+		return API.commonPostFunc( `${API.authEndpoint}logins/`, userData );
 	},
 
-	logout: async () => {
-		return await API.makeGetRequest(API.authEndpoint + "logouts/");
+	register: (userData) => {
+		return API.commonPostFunc( `${API.authEndpoint}signups/`, userData );
 	},
 
-	getUser: async () => {
-		return await API.makeGetRequest(API.authEndpoint + "userData/");
+	createChatRoom: (username) => {
+		return API.commonPostFunc(`${API.authEndpoint}create/`, { username: username });
 	},
 
-	getFriends: async () => {
-		return await API.makeGetRequest(
-			API.friendshipEndpoint + "?type=friends"
-		);
+	// Function Make a GET request
+	isLogedIn: () => {
+		return API.commonGetFunc(`${API.authEndpoint}usercheck/`);
+	},
+
+	logout: () => {
+		return API.commonGetFunc(`${API.authEndpoint}logouts/`);
+	},
+
+	getUser: () => {
+		return API.commonGetFunc( `${API.authEndpoint}userData/` );
+	},
+
+	getFriends: () => {
+		return API.commonGetFunc( `${API.friendshipEndpoint}?type=friends` );
 	},
 
 	getConversatons: async () => {
-		return await API.makeGetRequest(API.chatEndpoint);
+		return API.commonGetFunc( API.chatEndpoint );
 	},
 
-	getConvMessages: async (room_id) => {
-		return await API.makeGetRequest(API.chatEndpoint + room_id);
+	getConvMessages:  (room_id) => {
+		return API.commonGetFunc( `${API.chatEndpoint}${room_id}` );
 	},
 
-	markMessagesAsRead: async (room_id) => {
-		const res = await API.makeGetRequest(
-			API.chatEndpoint + "read/" + room_id + "/"
-		);
-		return;
+	markMessagesAsRead: (room_id) => {
+		API.commonGetFunc( `${API.chatEndpoint}read/${room_id}/` );
 	},
 
-	createChatRoom: async (username) => {
-		return await API.makePostRequest(API.chatEndpoint + "create/", {
-			username: username
-		});
-	},
 	makePostRequest: async (url, data) => {
 		const headers = {
 			"Content-Type": "application/json"
 		};
 		const response = await fetch(url, {
 			method: "POST",
-			headers: headers,
+			headers,
 			body: JSON.stringify(data)
 		});
 		return response;
@@ -75,14 +89,14 @@ const API = {
 		const opts = {
 			method: "GET",
 			mode: "same-origin",
-			headers: headers,
+			headers,
 			credentials: "include" // Ensure cookies are included
 		};
 		try {
 			const response = await fetch(url, opts);
 			return response;
 		} catch (e) {
-			console.log("error", e);
+			console.log("Error: ", e);
 		}
 		return null;
 	}

@@ -2,10 +2,10 @@ import { routes as customElem } from "./routes.js";
 
 export const router = {
 
-	goto: function ( path, containerId, addToHistory = true )
+	goto: (path, containerId, addToHistory = true) =>
 	{
 		const container = document.getElementById(containerId);
-		
+
 		if ( addToHistory )
 			history.pushState({ path }, null, path);
 
@@ -13,22 +13,21 @@ export const router = {
 
 		container.appendChild( customElem(path) );
 
-		scrollX = 0;
-		scrollY = 0;
+		window.scrollTo(0, 0);
 	},
 
-	redirecto: async function (path)
+	redirecto: async path =>
 	{
+		// skipcq: JS-0125
 		const userIsLogged = await auth.isAuth();
-
 		if (userIsLogged)
 		{
-			if (path == "/login" || path == "/")
-				this.goto("/platform", "root");
+			if (path === "/login" || path === "/")
+				router.goto("/platform", "root");
 			else
-				this.goto(path, "root");
+				router.goto(path, "root");
 		}
 		else
-			this.goto("/", "root");
+			router.goto("/", "root");
 	}
 }
