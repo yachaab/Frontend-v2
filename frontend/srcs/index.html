@@ -12,8 +12,13 @@
     <!-- Views -->
     <template id="home-view">
         <nav class="d-flex navbar justify-content-between">
-            <a class="navbar-brand">Pong.me</a>
-            <a class="home-buttons navbar-btn" href="/login">Login</a>
+            <a class="navbar-brand" href="/">Pong.me</a>
+            <a class="home-buttons navbar-btn" href="/login">
+                <custom-button
+                    label="Login"
+                    class="login-btn">
+                </custom-button>
+            </a>
         </nav>
         <div id="card-hold"></div>
         <main class="home">
@@ -22,17 +27,17 @@
                 Pong.me support realtime game, chat, group chat channel,
                 ranking system and tournament.
             </p>
-            <a class="navbar-btn" href="#"
-                ><main-button
-                    name="Discover Now"
-                    class="home-buttons discover-btn"
-                ></main-button
-            ></a>
+            <a class="navbar-btn" href="/platform">
+                <custom-button
+                    label="Discover Now"
+                    class="discover-btn">
+                </custom-button>
+            </a>
         </main>
     </template>
     
     <template id="login-view">
-        <filter class="bluer"></filter>
+        <!-- <filter class="bluer"></filter> -->
         <div class="login-form">
             <div class="sub-login-form">
                 <div class="logo">Pong.me</div>
@@ -49,7 +54,7 @@
                             </span>
                         </button>
                     </a>
-                    <a href="/login" class="intra-btn" name="intra">
+                    <a href="/platform" class="intra-btn" name="intra">
                         <button
                             type="button"
                             role="button"

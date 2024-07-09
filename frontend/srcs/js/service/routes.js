@@ -11,7 +11,7 @@ export const routes = (path) => {
         {
             let page = path.substring(1);
             if (!page.length) page = "home";
-            return ( document.createElement(`${page}-page`) );
+            return ( document.createElement(`${page}-view`) );
         }
         default:
         {
