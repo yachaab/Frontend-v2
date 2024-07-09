@@ -8,7 +8,6 @@ from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer
 from django.shortcuts import redirect, render
 from django.conf import settings
-from rest_framework.views import APIView
 from .services import (
     create_player,
     jwt_generation,
@@ -39,7 +38,6 @@ import json
 import requests
 import urllib.parse
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import permission_classes
 
 # from rest_framework.permissions import IsAuthenticated
 # from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -637,11 +635,6 @@ class FriendshipRelation(APIView):
 
         except Exception as e:
             return Response({"error": str(e), "status": 500})
-
-
-# Temporary SignUp/Login/Logout methods for Chat testing
-
-from .serializers import UserSerializer
 
 
 @api_view(["POST"])
