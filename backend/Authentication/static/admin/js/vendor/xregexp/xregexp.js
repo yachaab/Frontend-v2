@@ -2840,8 +2840,8 @@ function augment(regex, captureNames, xSource, xFlags, isInternalOnly) {
     }
 
     // Can't auto-inherit these since the XRegExp constructor returns a nonprimitive value
-    if (regex.__proto__) {
-        regex.__proto__ = XRegExp.prototype;
+    if (Object.getPrototypeOf(regex)) {
+        Object.setPrototypeOf(regex, XRegExp.prototype);
     } else {
         for (p in XRegExp.prototype) {
             // An `XRegExp.prototype.hasOwnProperty(p)` check wouldn't be worth it here, since this
