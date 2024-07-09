@@ -516,7 +516,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : Object.setPrototypeOf(subClass, superClass); }
 
 var ParameterError = function (_Error) {
   _inherits(ParameterError, _Error);
@@ -524,7 +524,7 @@ var ParameterError = function (_Error) {
   function ParameterError(message) {
     _classCallCheck(this, ParameterError);
 
-    var _this = _possibleConstructorReturn(this, (ParameterError.__proto__ || Object.getPrototypeOf(ParameterError)).call(this, message));
+    var _this = _possibleConstructorReturn(this, (Object.getPrototypeOf(ParameterError) || Object.getPrototypeOf(ParameterError)).call(this, message));
 
     _this.message = message;
     _this.name = 'ParameterError';
@@ -540,7 +540,7 @@ var LinkLookupError = function (_Error2) {
   function LinkLookupError(message) {
     _classCallCheck(this, LinkLookupError);
 
-    var _this2 = _possibleConstructorReturn(this, (LinkLookupError.__proto__ || Object.getPrototypeOf(LinkLookupError)).call(this, message));
+    var _this2 = _possibleConstructorReturn(this, (Object.getPrototypeOf(LinkLookupError) || Object.getPrototypeOf(LinkLookupError)).call(this, message));
 
     _this2.message = message;
     _this2.name = 'LinkLookupError';
@@ -556,7 +556,7 @@ var ErrorMessage = function (_Error3) {
   function ErrorMessage(message, content) {
     _classCallCheck(this, ErrorMessage);
 
-    var _this3 = _possibleConstructorReturn(this, (ErrorMessage.__proto__ || Object.getPrototypeOf(ErrorMessage)).call(this, message));
+    var _this3 = _possibleConstructorReturn(this, (Object.getPrototypeOf(ErrorMessage) || Object.getPrototypeOf(ErrorMessage)).call(this, message));
 
     _this3.message = message;
     _this3.content = content;
