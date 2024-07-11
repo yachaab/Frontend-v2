@@ -1,5 +1,10 @@
 /* @import "./chat_style.css"; */
 
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('../assets/font/2P.ttf') format('truetype');
+}
+
 *,
 *::before,
 *::after {
@@ -21,23 +26,79 @@ body {
     right: 0;
 }
 
-#root {
+/* Main UI */
+#main-ui
+{
+    height: 100%;
+    width: 100%;
+}
+
+#container
+{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1d203e !important;
     position: relative;
     height: 100%;
     width: 100%;
 }
 
-header {
-    background-color: rgba(33, 37, 41, 0.4);
-    text-align: center;
-    position: sticky;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 999;
-    height: 60px;
+/* Home View */
+#home-view
+{
+    width: 70%;
+    height: 100%;
+    font-family: "Press Start 2P" !important;
 }
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+nav a {
+    color: #fff !important;
+    text-decoration: none;
+
+}
+
+.home-buttons {
+    width: fit-content;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    background: rgb(190, 60, 237) !important;
+    background: linear-gradient(90deg,
+            rgba(190, 60, 237, 1) 43%,
+            rgb(158, 165, 179) 100%) !important;
+}
+
+.discover-btn {
+    padding: 15px 80px !important;
+    background: none;
+    font-size: 14px;
+}
+
+.login-btn
+{
+    padding: 8px 30px !important;
+    background: none;
+    font-size: 12px;
+}
+
+.home {
+    width: 80%;
+    height: calc(100vh - 100px);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8%;
+    justify-content: center;
+}
+

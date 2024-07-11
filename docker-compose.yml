@@ -68,6 +68,7 @@ services:
         restart: always
 
     # chat:
+    #       init: true
     #     container_name: chat
     #     build:
     #         context: ./backend/chat
@@ -84,6 +85,7 @@ services:
     #         - auth
     #     restart: always
     # ws_chat:
+        # init: true
     #     container_name: ws_chat
     #     build:
     #         context: ./backend/ws_chat
