@@ -13,6 +13,7 @@ const API = {
 		catch ( err )
 		{
 			console.log("Error: ", err);
+			return null;
 		}
 	},
 
@@ -25,6 +26,7 @@ const API = {
 		catch ( err )
 		{
 			console.log("Error: ", err);
+			return null;
 		}
 	},
 
@@ -58,7 +60,7 @@ const API = {
 		return API.commonGetFunc( `${API.friendshipEndpoint}?type=friends` );
 	},
 
-	getConversatons: async () => {
+	getConversatons:  () => {
 		return API.commonGetFunc( API.chatEndpoint );
 	},
 

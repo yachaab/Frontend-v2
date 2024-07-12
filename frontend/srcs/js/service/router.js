@@ -1,35 +1,38 @@
-import { routes as customElem } from "./routes.js";
-
 export const router = {
 
-	goto: (path, container, addToHistory = true) =>
+	goto: (path, addToHistory = true) =>
 	{
+		// put toggling logic here
+		if ( path === "/platform" )
+		{
+			window.component.left.removeAttribute('hidden');
+			window.component.right.removeAttribute('hidden');
+			window.component.game.removeAttribute('hidden');
+			window.component.middle.removeAttribute('hidden');
+		}
+
+
 		if ( addToHistory )
-			history.pushState({ path }, null, path);
-		// container.innerHTML = "";
-		console.log("container: ", container.firstChild);
-		// if ( typeof(container.children[1]) !== "undefined" );
-		// 	container.remove(container.children[1]);
-		container.appendChild( customElem( path ) );
+			history.pushState({ path }, null, location.origin + path);
 		window.scrollTo(0, 0);
 	},
 
-	redirecto: async (path, container) =>
+	redirecto: async (path) =>
 	{
-		const userIsLogged = await auth.isAuth();
+		const userIsLogged = await window.auth.isAuth();
 		if (userIsLogged)
 		{
 			if (path === "/login" || path === "/")
-				router.goto("/platform", container);
+				router.goto("/platform");
 			else
-				router.goto(path, container);
+				router.goto(path);
 		}
 		else
 		{
-			if (  path === "/login", path === "/platform" )
-				router.goto("/login", container);
+			if (  path === "/login" || path === "/platform" )
+				router.goto("/login");
 			else
-				router.goto("/", container);
+				router.goto("/");
 		}
 	}
 }
