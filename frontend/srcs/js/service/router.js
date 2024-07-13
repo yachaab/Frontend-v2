@@ -4,13 +4,12 @@ export const router = {
 	{
 		// put toggling logic here
 		if ( path === "/platform" )
-		{
-			window.component.left.removeAttribute('hidden');
-			window.component.right.removeAttribute('hidden');
-			window.component.game.removeAttribute('hidden');
-			window.component.middle.removeAttribute('hidden');
-		}
-
+			{
+				window.component.left.removeAttribute('hidden');
+				window.component.right.removeAttribute('hidden');
+				window.component.middle.removeAttribute('hidden');
+				window.component.platform.removeAttribute('hidden');
+			}		
 
 		if ( addToHistory )
 			history.pushState({ path }, null, location.origin + path);
@@ -29,10 +28,19 @@ export const router = {
 		}
 		else
 		{
-			if (  path === "/login" || path === "/platform" )
+			if (  path === "/login" )
 				router.goto("/login");
 			else
-				router.goto("/");
+				router.goto("/platform");
 		}
 	}
 }
+
+/*
+case 1:
+	first time enter to the app;
+case 2:
+	enter specific url;
+case 3:
+	refresh the page in specific url
+*/

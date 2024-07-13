@@ -43,7 +43,7 @@ class Home extends HTMLElement
 }
 
 // skipcq: JS-D1001
-export class Sidebar extends HTMLElement
+class Sidebar extends HTMLElement
 {
     constructor()
     {
@@ -57,14 +57,11 @@ export class Sidebar extends HTMLElement
         this.innerHTML +=
         `
             <nav class="nav">
-                <a href="/platform" class="nav_logo">
-                    <i class="bx bxs-tennis-ball nav_logo-icon"></i>
+                <a href="/" class="nav_logo">
+                    <i class="bx bx-grid-alt nav_icon"></i>
                 </a>
                 <div class="nav_list">
-                    <a href="/platform" class="nav_link active">
-                        <i class="bx bx-grid-alt nav_icon"></i>
-                    </a>
-                    <a href="/game" class="nav_link">
+                    <a href="/paltform" class="nav_link">
                         <i class="bx bxs-invader nav_icon"></i>
                     </a>
                     <a href="/setting" class="nav_link">
@@ -103,7 +100,7 @@ export class Sidebar extends HTMLElement
     }
 }
 // Game View
-export class Game extends HTMLElement
+class Game extends HTMLElement
 {
     constructor() { super('foo'); }
     // connectedCallback
@@ -116,47 +113,223 @@ export class Game extends HTMLElement
                 .game-section
                 {
                     width: 95%;
-                    height: 600px;
-                    border: 1px solid rgba(255, 255, 255, 0.25);
+                    height: 800px;
+                    border: 1px solid rgba(255, 255, 255, 0.10);
                 }
                 .game-mode-section
                 {
                     .game-mode-title
                     {
                         color: #fff;
-                        padding: 10px 15px;
+                        padding: 10px 0;
                     }
-                    .components
+                    .game-mode-component
                     {
-                        // border: 1px solid rgba(255, 255, 255, 0.25);
-                        border-radius: 18px;
+                        width: 100%;
                         display: flex;
                         flex-direction: row;
-                        width: 100%;
-                        height: 90%;
                         justify-content: space-around;
-                        gap: 2rem;
                     }
                     height: 230px;
                     width: 90%;
+                    align-items: center;
                 }
             </style>
-
             <div class="game-section"></div>
 			<div class="game-mode-section">
 				<div class="game-mode-title">Game Mode</div>
-				<game-mode src="mode1.jpg"></game-mode>
-				<game-mode src="mode2.jpg"></game-mode>
-				<game-mode src="mode3.jpg"></game-mode>
+                <div class="game-mode-component">
+                    <game-mode src="js/view/src/img/1.jpg" title="Friend"></game-mode>
+                    <game-mode src="js/view/src/img/2.jpg" title="Bot"></game-mode>
+                    <game-mode src="js/view/src/img/3.jpg" title="Solominti"></game-mode>
+                </div>
 			</div>
         `;
     }
 }
 
+
+// Game Mode component
+class GameMode extends HTMLElement
+{
+    constructor()
+    {
+        super('foo');
+        this.root = this.attachShadow({mode:"open"})
+    }
+    // connected call back
+    connectedCallback()
+    {
+        this.setAttribute("id", "game-mode");
+        const srcAtt = this.getAttribute("src");
+        const titleAtt = this.getAttribute("title");
+        this.root.innerHTML += `
+            <style>
+                :host
+                {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                    align-items: center;
+                }
+                img
+                {
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 12px;
+                    cursor: pointer;
+                }
+                img:hover 
+                {
+                    -webkit-filter: blur(1.5px);
+                }
+                .game-mode-float
+                {
+                    display: flex;
+                    width: 150px;
+                    height: 150px;
+                    position: absolute;
+                    border-radius: 12px;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: -1;
+                    pointer-events: none;
+                }
+            </style>
+            <div class="game-mode-float">${titleAtt}</div>
+            <img src="${srcAtt}">
+        `;
+
+        const img = this.root.querySelector("img");
+        const title = this.root.querySelector(".game-mode-float");
+        img.addEventListener("mouseenter", () =>
+        {
+            title.style.zIndex = '99';
+        });
+        img.addEventListener("mouseleave", () =>
+        {
+            title.style.zIndex = '-1';
+        });
+    }
+}
+
+// User Profile
+class Profile extends HTMLElement
+{
+    constructor()
+    {
+      super('foo');
+      this.root = this.attachShadow({mode:"open"})
+    }
+    // connected call back
+    connectedCallback()
+    {
+      this.setAttribute("id", "profile-view");
+      this.setAttribute("hidden", "");
+      
+    //   const win = this.querySelector(".win");
+    //   win.textContent = `Win Count: ${window.auth.wins}`;
+  
+    //   const loss = this.querySelector(".loss");
+    //   loss.textContent = `Loss Count: ${window.auth.wins}`;
+  
+    //   const avatar = this.querySelector(".avatar img");
+    //   avatar.src = window.auth.avatar;
+  
+    //   const fullname = this.querySelector(".fullname");
+    //   fullname.textContent = `${window.auth.fullname}`;
+  
+    //   const username = this.querySelector(".username");
+    //   username.textContent = `@${window.auth.user}`;
+    }
+}
+// Platform
+class Platform extends HTMLElement
+{
+    constructor()
+    {
+        super('foo');
+        this.root = this.attachShadow({mode:"open"});
+    }
+    // 
+    connectedCallback()
+    {
+        this.setAttribute('id', 'platform-view');
+        this.setAttribute('hidden', '');
+        this.root.innerHTML += `
+        <style>
+            :host
+            {
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+            }
+            .container
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 150px;
+                width: 100%;
+                height: 40%;
+            }
+            .pong
+            {
+                display: flex;
+                justify-content: end;
+                align-items: center;
+                flex-grow: 1;
+                position: relative;
+
+            }
+            .xo
+            {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                flex-grow: 1;
+            }
+            .pong::before
+            {
+                content: "";
+                position: absolute;
+                width: 350px;
+                height: 350px;
+                background: red;
+            }
+            img
+            {
+                border-radius: 12px;
+                max-width: 400px;
+                max-height: 400px;
+            }
+        </style>
+        <div class="container">
+            <div class="pong">
+                <img src="js/view/src/img/pong.gif">
+            </div>
+            <div class="xo">
+                <img src="js/view/src/img/xo.gif">
+            </div>
+        </div>
+        `;
+    }
+}
 // skipcq: JS-D1001
 export class MainUI extends HTMLElement
 {
-    constructor() { super('foo'); }
+    constructor()
+    {
+        super('foo');
+        customElements.define("sidebar-view", Sidebar);
+        customElements.define("game-view", Game);
+        customElements.define("game-mode", GameMode);
+        customElements.define("platform-view", Platform);
+        customElements.define("profile-mode", Profile);
+    }
     // skipcq: JS-D1001
     connectedCallback()
     {
@@ -169,6 +342,7 @@ export class MainUI extends HTMLElement
         const sidebar   = document.createElement("sidebar-view");
         const profile   = document.createElement("profile-view");
         const setting   = document.createElement("setting-view");
+        const platform   = document.createElement("platform-view");
 
         this.setAttribute("id", "main-ui");
         left.setAttribute("id", "left-view");
@@ -184,6 +358,7 @@ export class MainUI extends HTMLElement
         middle.appendChild(game);
         middle.appendChild(profile);
         middle.appendChild(setting);
+        middle.appendChild(platform);
         
         this.appendChild(left);
         this.appendChild(middle);
