@@ -3,12 +3,12 @@ export const router = {
 	goto: (path, addToHistory = true) =>
 	{
 		// put toggling logic here
-		if ( path === "/platform" )
+		if ( path === "/game" )
 			{
 				window.component.left.removeAttribute('hidden');
 				window.component.right.removeAttribute('hidden');
 				window.component.middle.removeAttribute('hidden');
-				window.component.platform.removeAttribute('hidden');
+				window.component.game.removeAttribute('hidden');
 			}		
 
 		if ( addToHistory )

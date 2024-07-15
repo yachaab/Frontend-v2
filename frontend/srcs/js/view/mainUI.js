@@ -1,4 +1,4 @@
-// skipcq: JS-D1001
+// Home View
 export class Home extends HTMLElement
 {
   constructor() { super('foo'); }
@@ -41,7 +41,7 @@ export class Home extends HTMLElement
 //     });
 //   }
 }
-// skipcq: JS-D1001
+// Sidebar View
 export class Sidebar extends HTMLElement
 {
     constructor()
@@ -113,7 +113,7 @@ export class Game extends HTMLElement
                 {
                     width: 95%;
                     height: 800px;
-                    border: 1px solid rgba(255, 255, 255, 0.10);
+                    border: 1px solid var(--teal);
                 }
                 .game-mode-section
                 {
@@ -212,7 +212,7 @@ export class GameMode extends HTMLElement
         });
     }
 }
-// User Profile
+// User Profile View
 export class Profile extends HTMLElement
 {
     constructor()
@@ -242,33 +242,33 @@ export class Profile extends HTMLElement
     //   username.textContent = `@${window.auth.user}`;
     }
 }
-// Platform
+// Platform View
 export class Platform extends HTMLElement
 {
     constructor()
     {
         super('foo');
+        this.root = this.attachShadow({mode:"open"});
     }
     // 
     connectedCallback()
     {
         this.setAttribute('id', 'platform-view');
         this.setAttribute('hidden', '');
-        this.innerHTML += `
+        this.root.innerHTML += `
         <style>
             :host
             {
                 width: 100%;
                 height: 100%;
-                display: inline-block;
             }
             .container
             {
                 display: flex !important;
                 flex-direction: row;
-                justify-content: space-around;
+                justify-content: center;
                 gap: 150px;
-                width: 80%;
+                width: 100%;
                 height: 40%;
             }
             .pong, .xo
@@ -312,6 +312,7 @@ export class Platform extends HTMLElement
                 color: var(--light-olive);
                 box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
                 transition: all 0.1s ease, background 0.3s ease;
+                font-family: "Press Start 2P", sans-serif !important;
             }
             .local
             {
@@ -408,7 +409,6 @@ export class Platform extends HTMLElement
                 flex-direction: row;
                 justify-content: center;
                 gap: 2.5rem;
-                white-space: no-wrap;
                 animation: 20s sliding infinite linear;
             }
         </style>
@@ -472,7 +472,7 @@ export class Platform extends HTMLElement
         `;
     }
 }
-// skipcq: JS-D1001
+// Main UI View
 export class MainUI extends HTMLElement
 {
     constructor()
