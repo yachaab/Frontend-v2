@@ -70,6 +70,7 @@ body {
     padding-top: 30px;
     border-left: 1px solid rgba(255, 255, 255, 0.10);
     border-right: 1px solid rgba(255, 255, 255, 0.10);
+    overflow: hidden;
 }
 
 #right-view {

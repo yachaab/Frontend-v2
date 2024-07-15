@@ -391,6 +391,10 @@ export class Platform extends HTMLElement
                 align-items: center;
                 max-height: 100%;
             }
+            .rank:hover .slide
+            {
+                animation-play-state: paused;
+            }
             @keyframes sliding
             {
                 from{ transform: translateX(80%); }
@@ -404,9 +408,8 @@ export class Platform extends HTMLElement
                 flex-direction: row;
                 justify-content: center;
                 gap: 2.5rem;
-
-                white-space: no-wrap;  
-                animation: 8s sliding infinite linear;
+                white-space: no-wrap;
+                animation: 20s sliding infinite linear;
             }
         </style>
         <div class="container">
