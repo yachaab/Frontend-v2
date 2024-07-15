@@ -264,35 +264,27 @@ export class Platform extends HTMLElement
             }
             .container
             {
-                display: flex;
+                display: flex !important;
                 flex-direction: row;
                 justify-content: space-around;
                 gap: 150px;
                 width: 80%;
                 height: 40%;
             }
-            .pong
+            .pong, .xo
             {
                 display: flex;
                 justify-content: end;
                 align-items: center;
-                flex-grow: 1;
                 position: relative;
 
             }
-            .xo
-            {
-                display: flex;
-                justify-content: end;
-                align-items: center;
-                flex-grow: 1;
-                position: relative;
-            }
-            img
+            .pong img, .xo img
             {
                 border-radius: 12px;
                 max-width: 100%;
                 max-height: 100%;
+                min-width: 500px;
             }
 
             .buttons-container
@@ -307,19 +299,19 @@ export class Platform extends HTMLElement
 
             .button 
             {
-            font-size: 14px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: none;
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 12.5px;
-            border-radius: 8px;
-            background-color: var(--dark-teal);
-            color: var(--light-olive);
-            box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
-            transition: all 0.1s ease, background 0.3s ease;
+                font-size: 14px;
+                font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                border: none;
+                cursor: pointer;
+                display: inline-block;
+                padding: 8px 12.5px;
+                border-radius: 8px;
+                background-color: var(--dark-teal);
+                color: var(--light-olive);
+                box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
+                transition: all 0.1s ease, background 0.3s ease;
             }
             .local
             {
@@ -341,8 +333,83 @@ export class Platform extends HTMLElement
                 box-shadow: 0 0 0 3px #2f2e41, 0 4px 0 #2f2e41;
                 transform: translateY(2px);
             }
+            .rank
+            {
+                margin-top: 80px;
+                width: 100%;
+                height: 55%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .rank-title
+            {
+                padding: 10px 0;
+                width: 100%;
+                text-align: center;
+                color: var(--dark-purple);
+            }
+            .avatar {
+                width: 120px;
+                height: 120px;
+                border-radius: 12px;
+            }
+            .avatar img{
+                width: 100%;
+                height: 100%;
+                border-radius: 12px;
+            }
+            
+            .name {
+                width: 100%;
+                text-align: center;
+                color: var(--light-olive);
+                font-size: 12px;
+                padding: 10px 0;
+            
+            }
+            .points {
+                margin-top: 5px;
+                color: var(--dark-purple);
+                width: 100%;
+                height: 20%;
+                text-align: center;
+                font-size: 10px;
+            }
+            .rank-card
+            {
+                margin-top: 20px;
+                min-width: 180px;
+                max-width: 180px;
+                border-radius: 12px;
+                background-color: var(--teal);
+                height: 50%;
+                padding: 15px 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                max-height: 100%;
+            }
+            @keyframes sliding
+            {
+                from{ transform: translateX(80%); }
+                to{ transform: translateX(-100%); }
+            }
+            .slide
+            {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 2.5rem;
+
+                white-space: no-wrap;  
+                animation: 8s sliding infinite linear;
+            }
         </style>
-        <div export class="container">
+        <div class="container">
             <div export class="pong">
                 <img src="js/view/src/img/pong.gif">
                 <div class="buttons-container">
@@ -351,11 +418,52 @@ export class Platform extends HTMLElement
                 </div>
             </div>
             <div export class="xo">
-                <img src="js/view/src/img/xo.gif">
+                <img src="js/view/src/img/xo-teal.gif">
                  <div class="buttons-container">
                     <button class="button multi">Multiplayer</button>
                     <button class="button local-xo">Local</button>
                 </div>
+            </div>
+        </div>
+        <div class="rank">
+            <div class="rank-title">Players Rank</div>
+            <div class="slide">
+                <div class="rank-card">
+                    <div class="avatar">
+                        <!-- <img src="" alt="avatar"> -->
+                        <img src="https://avatar.iran.liara.run/public" />
+                    </div>
+                    <div class="name">YACHAAB</div>
+                    <div class="points">199pts</div>
+                </div>
+                <div class="rank-card">
+                    <div class="avatar">
+                        <!-- <img src="" alt="avatar"> -->
+                        <img src="https://avatar.iran.liara.run/public" />
+                    </div>
+                    <div class="name">YACHAAB</div>
+                    <div class="points">199pts</div>
+                </div>
+
+                <div class="rank-card">
+                    <div class="avatar">
+                        <!-- <img src="" alt="avatar"> -->
+                        <img src="https://avatar.iran.liara.run/public" />
+                    </div>
+                    <div class="name">YACHAAB</div>
+                    <div class="points">199pts</div>
+                </div>
+
+                <div class="rank-card">
+                    <div class="avatar">
+                        <!-- <img src="" alt="avatar"> -->
+                        <img src="https://avatar.iran.liara.run/public" />
+                    </div>
+                    <div class="name">YACHAAB</div>
+                    <div class="points">199pts</div>
+                </div>
+
+
             </div>
         </div>
         `;
