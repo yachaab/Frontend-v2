@@ -1,5 +1,5 @@
 // skipcq: JS-D1001
-class Home extends HTMLElement
+export class Home extends HTMLElement
 {
   constructor() { super('foo'); }
   // skipcq: JS-D1001
@@ -8,19 +8,19 @@ class Home extends HTMLElement
     this.setAttribute("id", "home-view");
     this.setAttribute("hidden", '');
     this.innerHTML += `
-      <nav class="d-flex navbar justify-content-between">
-          <a class="navbar-brand" href="/">Pong.me</a>
-          <a class="home-buttons navbar-btn login-btn" href="/login">
+      <nav export class="d-flex navbar justify-content-between">
+          <a export class="navbar-brand" href="/">Pong.me</a>
+          <a export class="home-buttons navbar-btn login-btn" href="/login">
               Login
           </a>
       </nav>
-      <main class="home">
+      <main export class="home">
           <h1>Discover, Play & Challenge Your Friends</h1>
           <p>
               Pong.me support realtime game, chat, group chat channel,
               ranking system and tournament.
           </p>
-          <a class="home-buttons navbar-btn discover-btn" href="/platform">
+          <a export class="home-buttons navbar-btn discover-btn" href="/platform">
               Discover Now
           </a>
       </main>
@@ -41,9 +41,8 @@ class Home extends HTMLElement
 //     });
 //   }
 }
-
 // skipcq: JS-D1001
-class Sidebar extends HTMLElement
+export class Sidebar extends HTMLElement
 {
     constructor()
     {
@@ -56,23 +55,23 @@ class Sidebar extends HTMLElement
 
         this.innerHTML +=
         `
-            <nav class="nav">
-                <a href="/" class="nav_logo">
-                    <i class="bx bx-grid-alt nav_icon"></i>
+            <nav export class="nav">
+                <a href="/" export class="nav_logo">
+                    <i export class="bx bx-grid-alt nav_icon"></i>
                 </a>
-                <div class="nav_list">
-                    <a href="/paltform" class="nav_link">
-                        <i class="bx bxs-invader nav_icon"></i>
+                <div export class="nav_list">
+                    <a href="/paltform" export class="nav_link">
+                        <i export class="bx bxs-invader nav_icon"></i>
                     </a>
-                    <a href="/setting" class="nav_link">
-                        <i class="bx bxs-cog nav_icon"></i>
+                    <a href="/setting" export class="nav_link">
+                        <i export class="bx bxs-cog nav_icon"></i>
                     </a>
-                    <a href="/" class="nav_link">
-                        <i class="bx bx-log-out nav_icon"></i>
+                    <a href="/" export class="nav_link">
+                        <i export class="bx bx-log-out nav_icon"></i>
                     </a>
                 </div>
-				<a href="/profile" class="nav_link">
-					<i class="bx bx-user nav_icon"></i>
+				<a href="/profile" export class="nav_link">
+					<i export class="bx bx-user nav_icon"></i>
 				</a>
 			</nav>
         `;
@@ -100,7 +99,7 @@ class Sidebar extends HTMLElement
     }
 }
 // Game View
-class Game extends HTMLElement
+export class Game extends HTMLElement
 {
     constructor() { super('foo'); }
     // connectedCallback
@@ -135,10 +134,10 @@ class Game extends HTMLElement
                     align-items: center;
                 }
             </style>
-            <div class="game-section"></div>
-			<div class="game-mode-section">
-				<div class="game-mode-title">Game Mode</div>
-                <div class="game-mode-component">
+            <div export class="game-section"></div>
+			<div export class="game-mode-section">
+				<div export class="game-mode-title">Game Mode</div>
+                <div export class="game-mode-component">
                     <game-mode src="js/view/src/img/1.jpg" title="Friend"></game-mode>
                     <game-mode src="js/view/src/img/2.jpg" title="Bot"></game-mode>
                     <game-mode src="js/view/src/img/3.jpg" title="Solominti"></game-mode>
@@ -147,10 +146,8 @@ class Game extends HTMLElement
         `;
     }
 }
-
-
 // Game Mode component
-class GameMode extends HTMLElement
+export class GameMode extends HTMLElement
 {
     constructor()
     {
@@ -199,7 +196,7 @@ class GameMode extends HTMLElement
                     pointer-events: none;
                 }
             </style>
-            <div class="game-mode-float">${titleAtt}</div>
+            <div export class="game-mode-float">${titleAtt}</div>
             <img src="${srcAtt}">
         `;
 
@@ -215,9 +212,8 @@ class GameMode extends HTMLElement
         });
     }
 }
-
 // User Profile
-class Profile extends HTMLElement
+export class Profile extends HTMLElement
 {
     constructor()
     {
@@ -247,19 +243,18 @@ class Profile extends HTMLElement
     }
 }
 // Platform
-class Platform extends HTMLElement
+export class Platform extends HTMLElement
 {
     constructor()
     {
         super('foo');
-        this.root = this.attachShadow({mode:"open"});
     }
     // 
     connectedCallback()
     {
         this.setAttribute('id', 'platform-view');
         this.setAttribute('hidden', '');
-        this.root.innerHTML += `
+        this.innerHTML += `
         <style>
             :host
             {
@@ -273,7 +268,7 @@ class Platform extends HTMLElement
                 flex-direction: row;
                 justify-content: space-around;
                 gap: 150px;
-                width: 100%;
+                width: 80%;
                 height: 40%;
             }
             .pong
@@ -288,31 +283,79 @@ class Platform extends HTMLElement
             .xo
             {
                 display: flex;
-                justify-content: start;
+                justify-content: end;
                 align-items: center;
                 flex-grow: 1;
-            }
-            .pong::before
-            {
-                content: "";
-                position: absolute;
-                width: 350px;
-                height: 350px;
-                background: red;
+                position: relative;
             }
             img
             {
                 border-radius: 12px;
-                max-width: 400px;
-                max-height: 400px;
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+            .buttons-container
+            {
+                width: 100%;
+                position: absolute;
+                bottom: 24px;
+                left: 0;
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .button 
+            {
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 12.5px;
+            border-radius: 8px;
+            background-color: var(--dark-teal);
+            color: var(--light-olive);
+            box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
+            transition: all 0.1s ease, background 0.3s ease;
+            }
+            .local
+            {
+                background: var(--coral) !important;
+            }
+            .local-xo
+            {
+                background: var(--light-olive) !important;
+                color: var(--coral);
+            }
+            .button:hover,
+            .button:focus
+            {
+                background: #df6108;
+            }
+
+            .button:active
+            {
+                box-shadow: 0 0 0 3px #2f2e41, 0 4px 0 #2f2e41;
+                transform: translateY(2px);
             }
         </style>
-        <div class="container">
-            <div class="pong">
+        <div export class="container">
+            <div export class="pong">
                 <img src="js/view/src/img/pong.gif">
+                <div class="buttons-container">
+                    <button class="button multi">Multiplayer</button>
+                    <button class="button local">Local</button>
+                </div>
             </div>
-            <div class="xo">
+            <div export class="xo">
                 <img src="js/view/src/img/xo.gif">
+                 <div class="buttons-container">
+                    <button class="button multi">Multiplayer</button>
+                    <button class="button local-xo">Local</button>
+                </div>
             </div>
         </div>
         `;
@@ -324,11 +367,6 @@ export class MainUI extends HTMLElement
     constructor()
     {
         super('foo');
-        customElements.define("sidebar-view", Sidebar);
-        customElements.define("game-view", Game);
-        customElements.define("game-mode", GameMode);
-        customElements.define("platform-view", Platform);
-        customElements.define("profile-mode", Profile);
     }
     // skipcq: JS-D1001
     connectedCallback()

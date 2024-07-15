@@ -1,6 +1,6 @@
 import { auth } from "./auth/Authentication.js";
 import { router } from "./service/router.js";
-import { MainUI} from "./view/mainUI.js";
+import { MainUI, Sidebar, Game, GameMode, Platform, Profile} from "./view/mainUI.js";
 
 window.router = router;
 window.auth = auth;
@@ -9,10 +9,11 @@ window.component = {};
 document.addEventListener("DOMContentLoaded", () =>
 {
     customElements.define("main-ui", MainUI);
-    // customElements.define("sidebar-view", Sidebar);
-    // customElements.define("game-view", Game);
-    // customElements.define("game-mode", GameMode);
-    // customElements.define("platform-view", Platform);
+    customElements.define("sidebar-view", Sidebar);
+    customElements.define("game-view", Game);
+    customElements.define("game-mode", GameMode);
+    customElements.define("platform-view", Platform);
+    customElements.define("profile-mode", Profile);
 
     window.component = {
         left: document.getElementById("left-view"),
