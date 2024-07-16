@@ -237,6 +237,7 @@ export class Profile extends HTMLElement
                 flex-flow: row wrap;
                 justify-content: space-between;
                 padding: 20px;
+                background-color: var(--teal);
             }
             .common {
                 display: flex;
@@ -292,20 +293,20 @@ export class Profile extends HTMLElement
 		</div>
       `;
       
-    //   const win = this.querySelector(".win");
-    //   win.textContent = `Win Count: ${window.auth.wins}`;
+      const win = this.root.querySelector(".win");
+      win.textContent = `Win Count: ${window.auth.wins}`;
   
-    //   const loss = this.querySelector(".loss");
-    //   loss.textContent = `Loss Count: ${window.auth.wins}`;
+      const loss = this.root.querySelector(".loss");
+      loss.textContent = `Loss Count: ${window.auth.wins}`;
   
-    //   const avatar = this.querySelector(".avatar img");
-    //   avatar.src = window.auth.avatar;
+      const avatar = this.root.querySelector(".avatar img");
+      avatar.src = window.auth.avatar;
   
-    //   const fullname = this.querySelector(".fullname");
-    //   fullname.textContent = `${window.auth.fullname}`;
+      const fullname = this.root.querySelector(".fullname");
+      fullname.textContent = `${window.auth.fullname}`;
   
-    //   const username = this.querySelector(".username");
-    //   username.textContent = `@${window.auth.user}`;
+      const username = this.root.querySelector(".username");
+      username.textContent = `@${window.auth.user}`;
     }
 }
 // Platform View
@@ -330,30 +331,36 @@ export class Platform extends HTMLElement
             }
             .container
             {
-                display: flex !important;
-                flex-direction: row;
-                justify-content: center;
-                gap: 150px;
                 width: 100%;
-                height: 40%;
+                height: 35%;
+                display: flex;
+                flex-direction: row;
+                // justify-content: center;
+            }
+            .wrapper
+            {
+                margin: 0 auto;
+                display: flex;
+                gap: 150px;
+                width: 80%;
+                height: 100%;
             }
             .pong, .xo
             {
-                display: flex;
-                justify-content: end;
-                align-items: center;
+                width: 100%;
                 position: relative;
-
+            }
+            .xo
+            {
+                justify-content: start !important;
             }
             .pong img, .xo img
             {
                 border-radius: 12px;
-                max-width: 100%;
-                max-height: 100%;
-                min-width: 500px;
+                width: 100%;
+                height: 100%;
             }
-
-            .buttons-container
+            .btn-wrapper
             {
                 width: 100%;
                 position: absolute;
@@ -362,17 +369,16 @@ export class Platform extends HTMLElement
                 display: flex;
                 justify-content: space-around;
             }
-
             .button 
             {
-                font-size: 14px;
-                font-weight: 400;
+                font-size: 80%;
+                font-weight: 300;
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 border: none;
                 cursor: pointer;
                 display: inline-block;
-                padding: 8px 12.5px;
+                padding: 2.5% 6%;
                 border-radius: 8px;
                 background-color: var(--dark-teal);
                 color: var(--light-olive);
@@ -395,11 +401,11 @@ export class Platform extends HTMLElement
                 background: #df6108;
             }
 
-            .button:active
-            {
-                box-shadow: 0 0 0 3px #2f2e41, 0 4px 0 #2f2e41;
-                transform: translateY(2px);
-            }
+            // .button:active
+            // {
+            //     box-shadow: 0 0 0 3px #2f2e41, 0 4px 0 #2f2e41;
+            //     transform: translateY(2px);
+            // }
             .rank
             {
                 margin-top: 80px;
@@ -479,18 +485,20 @@ export class Platform extends HTMLElement
             }
         </style>
         <div class="container">
-            <div export class="pong">
-                <img src="js/view/src/img/pong.gif">
-                <div class="buttons-container">
-                    <button class="button multi">Multiplayer</button>
-                    <button class="button local">Local</button>
+            <div class="wrapper">
+                <div class="pong">
+                    <img src="js/view/src/img/pong.gif">
+                    <div class="btn-wrapper">
+                        <button class="button multi">Multiplayer</button>
+                        <button class="button local">Local</button>
+                    </div>
                 </div>
-            </div>
-            <div export class="xo">
-                <img src="js/view/src/img/xo-teal.gif">
-                 <div class="buttons-container">
-                    <button class="button multi">Multiplayer</button>
-                    <button class="button local-xo">Local</button>
+                <div class="xo">
+                    <img src="js/view/src/img/xo-teal.gif">
+                    <div class="btn-wrapper">
+                        <button class="button multi">Multiplayer</button>
+                        <button class="button local-xo">Local</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -507,20 +515,6 @@ export class Platform extends HTMLElement
             </div>
         </div>
         `;
-        const win = this.root.querySelector(".win");
-        win.textContent = `Win Count: ${window.auth.wins}`;
-
-        const loss = this.root.querySelector(".loss");
-        loss.textContent = `Loss Count: ${window.auth.wins}`;
-
-        const avatar = this.root.querySelector(".avatar img");
-        avatar.src = window.auth.avatar;
-
-        const fullname = this.root.querySelector(".fullname");
-        fullname.textContent = `${window.auth.fullname}`;
-
-        const username = this.root.querySelector(".username");
-        username.textContent = `@${window.auth.user}`;
     }
 }
 // Main UI View

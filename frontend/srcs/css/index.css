@@ -63,21 +63,24 @@ body {
     height: 100%;
     min-width: 77px;
     max-width: 77px;
+    flex-basis: 4%;
+    background: red !important;
 }
 
 #middle-view {
-    flex-grow: 2;
+    /* flex-grow: 2; */
+    flex-basis: 100%;
     padding-top: 30px;
     border-left: 1px solid rgba(255, 255, 255, 0.10);
     border-right: 1px solid rgba(255, 255, 255, 0.10);
     overflow: hidden;
-}
-
+    }
+    
 #right-view {
     background-color: var(--teal);
     color: var(--light-olive);
-    flex-grow: .7;
-    min-width: 476px;
+    flex-basis: 30%;
+    flex-shrink: 0;
 }
 
 /* ------------------------- Main UIs End -------------------------*/
