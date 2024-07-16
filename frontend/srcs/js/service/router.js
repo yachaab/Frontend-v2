@@ -2,14 +2,14 @@ export const router = {
 
 	goto: (path, addToHistory = true) =>
 	{
-		// put toggling logic here
-		if ( path === "/game" )
-			{
-				window.component.left.removeAttribute('hidden');
-				window.component.right.removeAttribute('hidden');
-				window.component.middle.removeAttribute('hidden');
-				window.component.game.removeAttribute('hidden');
-			}		
+		const container = document.getElementById(`${path.substring(1)}-view`);
+		if ( path !== "/" )
+		{
+			window.component.left.removeAttribute('hidden');
+			window.component.right.removeAttribute('hidden');
+			window.component.middle.removeAttribute('hidden');
+			container.removeAttribute('hidden');
+		}
 
 		if ( addToHistory )
 			history.pushState({ path }, null, location.origin + path);
@@ -38,7 +38,7 @@ export const router = {
 
 /*
 case 1:
-	first time enter to the app;
+	first time enter to the app; -> 
 case 2:
 	enter specific url;
 case 3:

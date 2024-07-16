@@ -61,8 +61,8 @@ body {
 #left-view {
     flex-grow: 0.009;
     height: 100%;
-    width: 77px;
     min-width: 77px;
+    max-width: 77px;
 }
 
 #middle-view {

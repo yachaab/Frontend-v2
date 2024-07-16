@@ -56,11 +56,11 @@ export class Sidebar extends HTMLElement
         this.innerHTML +=
         `
             <nav export class="nav">
-                <a href="/" export class="nav_logo">
+                <a href="/platform" export class="nav_logo">
                     <i export class="bx bx-grid-alt nav_icon"></i>
                 </a>
                 <div export class="nav_list">
-                    <a href="/paltform" export class="nav_link">
+                    <a href="/game" export class="nav_link">
                         <i export class="bx bxs-invader nav_icon"></i>
                     </a>
                     <a href="/setting" export class="nav_link">
@@ -85,15 +85,16 @@ export class Sidebar extends HTMLElement
             // skipcq: JS-0002
             elem.addEventListener("click", (e) => {
                 e.preventDefault();
-                // const href = e.currentTarget.getAttribute("href");
+                const href = e.currentTarget.getAttribute("href");
+                console.log("That fyp")
                     // if ( href === "/" )
                     // {
                     //     // TODO: handle the logout logic
                     //     Auth.logout();
-                    //     global.router.navigateTo(href, "root");
+                    //     global.router.goto(href);
                         
                     // }
-                    // global.router.navigateTo(href, "middle");
+                    window.router.goto(href);
             });
         });
     }
@@ -109,12 +110,48 @@ export class Game extends HTMLElement
         this.setAttribute("hidden", "");
         this.innerHTML += `
             <style>
+                ::backdrop
+                {
+                    background-color: var(--light-olive);
+                }
                 .game-section
                 {
                     width: 95%;
-                    height: 800px;
+                    height: 100%;
+                    margin-bottom: 30px;
                     border: 1px solid var(--teal);
+                    position: relative;
                 }
+                .fscreen-btn
+                {
+                    position: absolute;
+                    top:  15px;
+                    right:  15px;
+                    background: rgba(0,0,0,0.05);
+                    border:  0;
+                    width:  40px;
+                    height:  40px;
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                    transition:  transform .3s;
+                    cursor:  pointer;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                .fscreen-btn:hover {
+                    transform: scale(1.125);
+                }
+                .fscreen-btn svg:nth-child(2) { 
+                    display: none;
+                }
+                [fullscreen] .fscreen-btn svg:nth-child(1) {
+                    display: none;
+                }
+                [fullscreen] .fscreen-btn svg:nth-child(2) {
+                    display: inline-block;
+                }
+
                 .game-mode-section
                 {
                     .game-mode-title
@@ -133,83 +170,42 @@ export class Game extends HTMLElement
                     width: 90%;
                     align-items: center;
                 }
+                
             </style>
-            <div export class="game-section"></div>
-			<div export class="game-mode-section">
-				<div export class="game-mode-title">Game Mode</div>
-                <div export class="game-mode-component">
-                    <game-mode src="js/view/src/img/1.jpg" title="Friend"></game-mode>
-                    <game-mode src="js/view/src/img/2.jpg" title="Bot"></game-mode>
-                    <game-mode src="js/view/src/img/3.jpg" title="Solominti"></game-mode>
-                </div>
+            <div class="game-section">
+                <button class="fscreen-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 
+                        7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 
+                        11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                    </svg>
+                </button>
 			</div>
         `;
-    }
-}
-// Game Mode component
-export class GameMode extends HTMLElement
-{
-    constructor()
-    {
-        super('foo');
-        this.root = this.attachShadow({mode:"open"})
-    }
-    // connected call back
-    connectedCallback()
-    {
-        this.setAttribute("id", "game-mode");
-        const srcAtt = this.getAttribute("src");
-        const titleAtt = this.getAttribute("title");
-        this.root.innerHTML += `
-            <style>
-                :host
-                {
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-evenly;
-                    align-items: center;
-                }
-                img
-                {
-                    width: 150px;
-                    height: 150px;
-                    border-radius: 12px;
-                    cursor: pointer;
-                }
-                img:hover 
-                {
-                    -webkit-filter: blur(1.5px);
-                }
-                .game-mode-float
-                {
-                    display: flex;
-                    width: 150px;
-                    height: 150px;
-                    position: absolute;
-                    border-radius: 12px;
-                    justify-content: center;
-                    align-items: center;
-                    z-index: -1;
-                    pointer-events: none;
-                }
-            </style>
-            <div export class="game-mode-float">${titleAtt}</div>
-            <img src="${srcAtt}">
-        `;
-
-        const img = this.root.querySelector("img");
-        const title = this.root.querySelector(".game-mode-float");
-        img.addEventListener("mouseenter", () =>
+        if ( document.fullscreenEnabled )
         {
-            title.style.zIndex = '99';
-        });
-        img.addEventListener("mouseleave", () =>
+            const button = this.querySelector("button");
+            button.addEventListener("click", toggleFscreen);
+            // document.addEventListener( "keydown", keyPress );
+        }
+        function toggleFscreen()
         {
-            title.style.zIndex = '-1';
-        });
+            console.log("clicked: ", document.body.getAttribute("fullscreen"));
+            if (document.body.getAttribute("fullscreen") === null) {
+                // document.body.requestFullscreen();
+                document.body.setAttribute("fullscreen","");
+                window.component.left.setAttribute('hidden', '');
+			    window.component.right.setAttribute('hidden', '');
+            } else {
+                // document.exitFullscreen();
+                document.body.removeAttribute("fullscreen");
+                window.component.left.removeAttribute('hidden');
+			    window.component.right.removeAttribute('hidden');
+            }
+        }
     }
 }
 // User Profile View
@@ -225,6 +221,76 @@ export class Profile extends HTMLElement
     {
       this.setAttribute("id", "profile-view");
       this.setAttribute("hidden", "");
+      this.root.innerHTML = `
+        <style>
+            :host {
+                width: 100%;
+                height: 100%;
+            }
+            .first {
+                margin: 0 auto;
+                border: solid 1px rgb(100 100 100 / .5)!important;
+                border-radius: 18px;
+                width: 90%;
+                height: 30%;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                padding: 20px;
+            }
+            .common {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: end;
+                font-size: 10px;
+                padding-bottom: 40px;
+            }
+            .win {
+                flex-grow: 2;
+                flex-basis: 2%}
+            .user {
+                flex: 4;
+                flex-basis: 8%}
+            .avatar {
+                width: 100%;
+                text-align: center;
+            }
+            div img {
+                width: 150px;
+                height: 150px;
+                border: solid 2px rgb(200 200 200 / .75)!important;
+                border-radius: 50%;
+                background: rgb(100 100 100 / .75);
+                object-fit: cover;
+            }
+            .info {
+                width: 100%;
+                padding-top: 20px;
+                text-align: center;
+                color: red;
+            }
+            .info:last-child {
+                color: rgb(200 200 200 / .75);
+                font-size: 8px;
+            }
+            .loss {
+                flex-grow: 2;
+                flex-basis: 2%;
+            }
+        </style>
+        <div class="first">
+            <div class="win common">wins: 10 pts</div>
+            <div class="user common">
+                <div class="avatar">
+                    <img src="" alt="" />
+                </div>
+                <div class="fullname info">fullname</div>
+                <div class="username info">@username</div>
+            </div>
+            <div class="loss common">loss: 0 pts</div>
+		</div>
+      `;
       
     //   const win = this.querySelector(".win");
     //   win.textContent = `Win Count: ${window.auth.wins}`;
@@ -409,7 +475,7 @@ export class Platform extends HTMLElement
                 flex-direction: row;
                 justify-content: center;
                 gap: 2.5rem;
-                animation: 20s sliding infinite linear;
+                animation: 10s sliding infinite linear;
             }
         </style>
         <div class="container">
@@ -433,43 +499,28 @@ export class Platform extends HTMLElement
             <div class="slide">
                 <div class="rank-card">
                     <div class="avatar">
-                        <!-- <img src="" alt="avatar"> -->
-                        <img src="https://avatar.iran.liara.run/public" />
+                        <!-- <img src="https://avatar.iran.liara.run/public" alt="avatar"> -->
                     </div>
                     <div class="name">YACHAAB</div>
                     <div class="points">199pts</div>
                 </div>
-                <div class="rank-card">
-                    <div class="avatar">
-                        <!-- <img src="" alt="avatar"> -->
-                        <img src="https://avatar.iran.liara.run/public" />
-                    </div>
-                    <div class="name">YACHAAB</div>
-                    <div class="points">199pts</div>
-                </div>
-
-                <div class="rank-card">
-                    <div class="avatar">
-                        <!-- <img src="" alt="avatar"> -->
-                        <img src="https://avatar.iran.liara.run/public" />
-                    </div>
-                    <div class="name">YACHAAB</div>
-                    <div class="points">199pts</div>
-                </div>
-
-                <div class="rank-card">
-                    <div class="avatar">
-                        <!-- <img src="" alt="avatar"> -->
-                        <img src="https://avatar.iran.liara.run/public" />
-                    </div>
-                    <div class="name">YACHAAB</div>
-                    <div class="points">199pts</div>
-                </div>
-
-
             </div>
         </div>
         `;
+        const win = this.root.querySelector(".win");
+        win.textContent = `Win Count: ${window.auth.wins}`;
+
+        const loss = this.root.querySelector(".loss");
+        loss.textContent = `Loss Count: ${window.auth.wins}`;
+
+        const avatar = this.root.querySelector(".avatar img");
+        avatar.src = window.auth.avatar;
+
+        const fullname = this.root.querySelector(".fullname");
+        fullname.textContent = `${window.auth.fullname}`;
+
+        const username = this.root.querySelector(".username");
+        username.textContent = `@${window.auth.user}`;
     }
 }
 // Main UI View

@@ -1,6 +1,6 @@
 import { auth } from "./auth/Authentication.js";
 import { router } from "./service/router.js";
-import { MainUI, Sidebar, Game, GameMode, Platform, Profile} from "./view/mainUI.js";
+import { MainUI, Sidebar, Game, Platform, Profile} from "./view/mainUI.js";
 
 window.router = router;
 window.auth = auth;
@@ -11,17 +11,16 @@ document.addEventListener("DOMContentLoaded", () =>
     customElements.define("main-ui", MainUI);
     customElements.define("sidebar-view", Sidebar);
     customElements.define("game-view", Game);
-    customElements.define("game-mode", GameMode);
     customElements.define("platform-view", Platform);
-    customElements.define("profile-mode", Profile);
+    customElements.define("profile-view", Profile);
 
     window.component = {
         left: document.getElementById("left-view"),
         middle: document.getElementById("middle-view"),
         right: document.getElementById("right-view"),
-        game: document.getElementById("game-view"),
-        profile: document.getElementById("profile-view"),
-        platform: document.getElementById("platform-view"),
+        // game: document.getElementById("game-view"),
+        // profile: document.getElementById("profile-view"),
+        // platform: document.getElementById("platform-view"),
         // home: document.getElementById("home-view"),
         // chat: document.getElementById("chat-view"),
         // sidebar: document.getElementById("sidebar-view"),
