@@ -199,11 +199,13 @@ export class Game extends HTMLElement
                 document.body.setAttribute("fullscreen","");
                 window.component.left.setAttribute('hidden', '');
 			    window.component.right.setAttribute('hidden', '');
+                window.component.middle.setAttribute('style', "flex-basis: 100%");
             } else {
                 // document.exitFullscreen();
                 document.body.removeAttribute("fullscreen");
                 window.component.left.removeAttribute('hidden');
 			    window.component.right.removeAttribute('hidden');
+                window.component.middle.removeAttribute('style');
             }
         }
     }

@@ -1,7 +1,3 @@
-version: "3.8"
-
-name: ft_transcendence
-
 networks:
     Net:
         name: network
@@ -13,9 +9,6 @@ services:
         build:
             context: ./frontend/server
             dockerfile: Dockerfile
-            # args:
-            #     HOST: ${HOST}
-            #     PORT: ${PORT}
         image: server:latest
         ports:
             - "8000:8000"
@@ -24,6 +17,9 @@ services:
         networks:
             - Net
         restart: always
+        depends_on:
+            - postgres_db
+            - auth
         
     postgres_db:
         init: true
@@ -45,12 +41,6 @@ services:
         # volumes:
         #     - postgres_db:/var/lib/postgresql/data
         restart: always
-
-        # depends_on:
-        #     - postgres_db
-        #     - auth
-            # - chat
-            # - ws_chat
 
     auth:
         init: true
