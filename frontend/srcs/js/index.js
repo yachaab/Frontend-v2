@@ -1,9 +1,7 @@
-import { auth } from "./auth/Authentication.js";
 import { router } from "./service/router.js";
-import { MainUI, Sidebar, Game, Platform, Profile} from "./view/mainUI.js";
+import { MainUI, Sidebar, Game, Platform, Profile, Home } from "./view/mainUI.js";
 
 window.router = router;
-window.auth = auth;
 window.component = {};
 
 document.addEventListener("DOMContentLoaded", () =>
@@ -12,45 +10,16 @@ document.addEventListener("DOMContentLoaded", () =>
     customElements.define("sidebar-view", Sidebar);
     customElements.define("game-view", Game);
     customElements.define("platform-view", Platform);
+    customElements.define("home-view", Home);
     customElements.define("profile-view", Profile);
 
     window.component = {
         left: document.getElementById("left-view"),
         middle: document.getElementById("middle-view"),
         right: document.getElementById("right-view"),
-        // game: document.getElementById("game-view"),
-        // profile: document.getElementById("profile-view"),
-        // platform: document.getElementById("platform-view"),
-        // home: document.getElementById("home-view"),
-        // chat: document.getElementById("chat-view"),
-        // sidebar: document.getElementById("sidebar-view"),
-        // setting: document.getElementById("setting-view")
     }
-
     // window.addEventListener("popstate", (e) => {
     //     router.redirecto( e.state.path);
     // });
-    
-    router.goto(location.pathname);
+    router.redirecto(location.pathname);
 });
-
-
-
-// if ( path === "/platform" )
-//     {
-//         window.component.left.removeAttribute('hidden');
-//         window.component.right.removeAttribute('hidden');
-//         window.component.game.removeAttribute('hidden');
-//         window.component.middle.removeAttribute('hidden');
-//     }
-//     else
-//     {
-//         window.component.left.setAttribute('hidden', '');
-//         window.component.right.setAttribute('hidden', '');
-//         window.component.game.setAttribute('hidden', '');
-//         window.component.middle.setAttribute('hidden', '');
-//     }
-    // if ( path === "/profile" )
-    // {
-    //     window.component.profile.removeAttribute('hidden');
-    // }

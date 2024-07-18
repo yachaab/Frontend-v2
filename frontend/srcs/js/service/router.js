@@ -1,14 +1,22 @@
+import { auth } from "../auth/Authentication.js";
 export const router = {
-
 	goto: (path, addToHistory = true) =>
 	{
-		const container = document.getElementById(`${path.substring(1)}-view`);
+	  let  container = document.getElementById(`${path.substring(1)}-view`);
 		if ( path !== "/" )
 		{
 			window.component.left.removeAttribute('hidden');
 			window.component.right.removeAttribute('hidden');
 			window.component.middle.removeAttribute('hidden');
 			container.removeAttribute('hidden');
+		}
+		else
+		{
+		  container = document.getElementById(`home-view`);
+		  window.component.left.setAttribute('hidden', '');
+      window.component.right.setAttribute('hidden', '');
+      window.component.middle.setAttribute('hidden', '');
+      container.removeAttribute('hidden');
 		}
 
 		if ( addToHistory )
@@ -18,9 +26,9 @@ export const router = {
 
 	redirecto: async (path) =>
 	{
-		const userIsLogged = await window.auth.isAuth();
+		const userIsLogged = await auth.isAuth();
 		if (userIsLogged)
-		{
+		{ 
 			if (path === "/login" || path === "/")
 				router.goto("/platform");
 			else
@@ -31,7 +39,7 @@ export const router = {
 			if (  path === "/login" )
 				router.goto("/login");
 			else
-				router.goto("/platform");
+				router.goto("/");
 		}
 	}
 }

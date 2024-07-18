@@ -1,45 +1,196 @@
+// Login View
+class Login extends HTMLElement {
+  constructor() { super('foo'); this.root = this.attachShadow({ mode: 'open' }); }
+  connectedCallback() {
+    this.setAttribute("id", "login-view");
+    this.setAttribute('hidden', '');
+    this.root.innerHTML += `
+    <style>
+      a {
+        text-decoration: none;
+      }
+      .bluer {
+        width: 100% !important;
+        height: 100% !important;
+        filter: blur(5px);
+        backdrop-filter: blur(5px);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 9;
+      }
+      .login-form {
+        width: 35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        z-index: 99;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: ease-in;
+        transition-delay: 5s;
+        padding-top: 20px;
+        padding-bottom: 40px;
+        box-shadow: rgba(68, 68, 68, 0.1) 0px 4px 16px, rgba(68, 68, 68, 0.1) 0px 8px 24px, rgba(68, 68, 68, 0.1) 0px 16px 56px;
+      }
+      
+      .sub-login-form {
+        width: 75%;
+        height: 100%;
+        text-align: center;
+      }
+      
+      .logo {
+        color: var(--light-olive);
+        font-weight: 400;
+        padding-top: 10px;
+        padding-bottom: 20px;
+      }
+      
+      .google-btn {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        color: var(--peach);
+      }
+      
+      a .intra-42
+      {
+        background: rgb(190, 60, 237) !important;
+        background: linear-gradient(
+          90deg,
+          rgba(190, 60, 237, 1) 43%,
+          rgb(158, 165, 179) 100%
+        ) !important;
+        border: none !important;
+      }
+      .intra-btn {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        justify-content: center;
+      }
+      /* --------------- Google + Intra buttons -------------- */
+      .button-23 {
+        font-size: 80%;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+        padding: 2.5% 6%;
+        border-radius: 8px;
+        background-color: var(--dark-teal);
+        color: var(--light-olive);
+        box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
+        transition: all 0.1s ease, background 0.3s ease;
+        font-family: "Press Start 2P", sans-serif !important;
+      }
+      .button-23:focus-visible {
+        box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+        transition: box-shadow 0.2s;
+        outline: none;
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .button-23:active {
+        transform: scale(0.96);
+        outline: none;
+      }
+      .button-23 span {
+        font-size: 14px;
+      }
+    </style>
+    <filter class="bluer"></filter>
+    <div class="login-form">
+			<div class="sub-login-form">
+				<div class="logo">Pong.me</div>
+				<div class="google-intra-login">
+					<a href="/platform" class="google-btn" name="google">
+						<button
+							type="button"
+							role="button"
+							class="button-23"
+							onclick="window.Auth.loginGoogle()"
+						>
+							<span class="G">G </span>Login with google<span>
+								>
+							</span>
+						</button>
+					</a>
+					<a href="/platform" class="intra-btn" name="intra">
+						<button
+							type="button"
+							role="button"
+							class="button-23 intra-42"
+							onclick="window.Auth.loginIntra()"
+						>
+							<span class="42">42 </span>Login with Intra<span>
+								>
+							</span>
+						</button>
+					</a>
+				</div>
+			</div>
+		</div>
+    `;
+    this.root.querySelector('.bluer').addEventListener('click', () => {
+      this.setAttribute('hidden', '');
+    });
+    const links = this.root.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+      });
+    });
+  }
+}
 // Home View
 export class Home extends HTMLElement
 {
-  constructor() { super('foo'); }
-  // skipcq: JS-D1001
+  constructor() { super('foo'); customElements.define("login-view", Login); }
   connectedCallback()
   {
     this.setAttribute("id", "home-view");
     this.setAttribute("hidden", '');
     this.innerHTML += `
-      <nav export class="d-flex navbar justify-content-between">
-          <a export class="navbar-brand" href="/">Pong.me</a>
-          <a export class="home-buttons navbar-btn login-btn" href="/login">
+      <login-view></login-view>
+      <nav class="d-flex navbar justify-content-between">
+          <a class="navbar-brand" href="/">Pong.me</a>
+          <a class="home-buttons navbar-btn login-btn" href="/login">
               Login
           </a>
       </nav>
-      <main export class="home">
+      <main class="home">
           <h1>Discover, Play & Challenge Your Friends</h1>
           <p>
               Pong.me support realtime game, chat, group chat channel,
               ranking system and tournament.
           </p>
-          <a export class="home-buttons navbar-btn discover-btn" href="/platform">
+          <a class="home-buttons navbar-btn discover-btn" href="/platform">
               Discover Now
           </a>
       </main>
     `;
-    // this.anchors();
+    this.anchors();
   }
-  // skipcq: JS-D1001
-//   anchors()
-//   {
-//     const mainContainer  = document.getElementById("container");
-//     const links = this.querySelectorAll("a");
-//     links.forEach((link) => {
-//       link.addEventListener("click", (e) => {
-//         e.preventDefault();
-//         const href = e.target.getAttribute("href");
-//         window.router.redirecto(href, mainContainer);
-//       });
-//     });
-//   }
+  anchors()
+  {
+    const links = this.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log("clicked");
+        this.querySelector('login-view').removeAttribute('hidden');
+      });
+    });
+  }
 }
 // Sidebar View
 export class Sidebar extends HTMLElement
@@ -226,89 +377,90 @@ export class Profile extends HTMLElement
       this.root.innerHTML = `
         <style>
             :host {
-                width: 100%;
-                height: 100%;
+              width: 100%;
+              height: 100%;
             }
             .first {
-                margin: 0 auto;
-                border: solid 1px rgb(100 100 100 / .5)!important;
-                border-radius: 18px;
-                width: 90%;
-                height: 30%;
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: space-between;
-                padding: 20px;
-                background-color: var(--teal);
+              margin: 0 auto;
+              border: solid 1px rgb(100 100 100 / .5)!important;
+              border-radius: 18px;
+              width: 90%;
+              height: 30%;
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: space-between;
+              padding: 20px;
+              background-color: var(--teal);
             }
             .common {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: end;
-                font-size: 10px;
-                padding-bottom: 40px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: end;
+              font-size: 10px;
+              padding-bottom: 40px;
             }
             .win {
-                flex-grow: 2;
-                flex-basis: 2%}
+              flex-grow: 2;
+              flex-basis: 2%}
             .user {
-                flex: 4;
-                flex-basis: 8%}
+              flex: 4;
+              flex-basis: 8%}
             .avatar {
-                width: 100%;
-                text-align: center;
+              width: 100%;
+              text-align: center;
             }
             div img {
-                width: 150px;
-                height: 150px;
-                border: solid 2px rgb(200 200 200 / .75)!important;
-                border-radius: 50%;
-                background: rgb(100 100 100 / .75);
-                object-fit: cover;
+              width: 150px;
+              height: 150px;
+              border: solid 2px rgb(200 200 200 / .75)!important;
+              border-radius: 50%;
+              background: rgb(100 100 100 / .75);
+              object-fit: cover;
             }
             .info {
-                width: 100%;
-                padding-top: 20px;
-                text-align: center;
-                color: red;
+              width: 100%;
+              padding-top: 20px;
+              text-align: center;
+              color: red;
             }
             .info:last-child {
-                color: rgb(200 200 200 / .75);
-                font-size: 8px;
+              color: rgb(200 200 200 / .75);
+              font-size: 8px;
             }
             .loss {
-                flex-grow: 2;
-                flex-basis: 2%;
+              flex-grow: 2;
+              flex-basis: 2%;
             }
         </style>
         <div class="first">
-            <div class="win common">wins: 10 pts</div>
-            <div class="user common">
-                <div class="avatar">
-                    <img src="" alt="" />
-                </div>
-                <div class="fullname info">fullname</div>
-                <div class="username info">@username</div>
-            </div>
-            <div class="loss common">loss: 0 pts</div>
-		</div>
+          <div class="win common">wins: 10 pts</div>
+          <div class="user common">
+              <div class="avatar">
+                <img src="" alt="" />
+              </div>
+              <div class="fullname info">fullname</div>
+              <div class="username info">@username</div>
+          </div>
+          <div class="loss common">loss: 0 pts</div>
+        </div>
       `;
-      
-      const win = this.root.querySelector(".win");
-      win.textContent = `Win Count: ${window.auth.wins}`;
+      console.log(window.auth);
+      // const win = this.root.querySelector(".win");
+      // console.log(window.Auth);
+      // win.textContent = `Win Count: ${window.Auth.wins}`;
   
-      const loss = this.root.querySelector(".loss");
-      loss.textContent = `Loss Count: ${window.auth.wins}`;
+      // const loss = this.root.querySelector(".loss");
+      // loss.textContent = `Loss Count: ${window.Auth.loss}`;
   
-      const avatar = this.root.querySelector(".avatar img");
-      avatar.src = window.auth.avatar;
+      // const avatar = this.root.querySelector(".avatar img");
+      // avatar.src = window.Auth.avatar;
   
-      const fullname = this.root.querySelector(".fullname");
-      fullname.textContent = `${window.auth.fullname}`;
+      // const fullname = this.root.querySelector(".fullname");
+      // fullname.textContent = `${window.Auth.fullname}`;
   
-      const username = this.root.querySelector(".username");
-      username.textContent = `@${window.auth.user}`;
+      // const username = this.root.querySelector(".username");
+      // username.textContent = `@${window.Auth.user}`;
     }
 }
 // Platform View
@@ -337,7 +489,6 @@ export class Platform extends HTMLElement
                 height: 35%;
                 display: flex;
                 flex-direction: row;
-                // justify-content: center;
             }
             .wrapper
             {
@@ -373,20 +524,20 @@ export class Platform extends HTMLElement
             }
             .button 
             {
-                font-size: 80%;
-                font-weight: 300;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                border: none;
-                cursor: pointer;
-                display: inline-block;
-                padding: 2.5% 6%;
-                border-radius: 8px;
-                background-color: var(--dark-teal);
-                color: var(--light-olive);
-                box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
-                transition: all 0.1s ease, background 0.3s ease;
-                font-family: "Press Start 2P", sans-serif !important;
+              font-size: 80%;
+              font-weight: 300;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              border: none;
+              cursor: pointer;
+              display: inline-block;
+              padding: 2.5% 6%;
+              border-radius: 8px;
+              background-color: var(--dark-teal);
+              color: var(--light-olive);
+              box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
+              transition: all 0.1s ease, background 0.3s ease;
+              font-family: "Press Start 2P", sans-serif !important;
             }
             .local
             {
@@ -402,12 +553,6 @@ export class Platform extends HTMLElement
             {
                 background: #df6108;
             }
-
-            // .button:active
-            // {
-            //     box-shadow: 0 0 0 3px #2f2e41, 0 4px 0 #2f2e41;
-            //     transform: translateY(2px);
-            // }
             .rank
             {
                 margin-top: 80px;
@@ -538,9 +683,12 @@ export class MainUI extends HTMLElement
         const sidebar   = document.createElement("sidebar-view");
         const profile   = document.createElement("profile-view");
         const setting   = document.createElement("setting-view");
-        const platform   = document.createElement("platform-view");
+        const platform  = document.createElement("platform-view");
+        const home      = document.createElement("home-view");
 
         this.setAttribute("id", "main-ui");
+        home.setAttribute("id", "home-view");
+        home.setAttribute("hidden", '');
         left.setAttribute("id", "left-view");
         left.setAttribute("hidden", '');
         right.setAttribute("id", "right-view");
@@ -556,6 +704,7 @@ export class MainUI extends HTMLElement
         middle.appendChild(setting);
         middle.appendChild(platform);
         
+        this.appendChild(home);
         this.appendChild(left);
         this.appendChild(middle);
         this.appendChild(right);

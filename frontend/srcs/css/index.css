@@ -35,7 +35,7 @@ html {
 }
 
 body {
-    background-color: var(--light-olive) !important;
+    background-color: var(--dark-teal) !important;
     color: var(--dark-purple);
     font-family: var(--body-font);
     height: 100vh;
@@ -50,8 +50,15 @@ body {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     overflow: hidden;
+    font-family: var(--body-font);
+}
+
+#home-view {
+    background-color: var(--dark-teal);
+    width: 70%;
+    height: 100%;
 }
 
 #left-view {
@@ -66,10 +73,11 @@ body {
     padding-top: 30px;
     overflow: hidden;
     font-family: var(--body-font);
+    background-color: var(--light-olive);
 }
 
 #right-view {
-    background-color: var(--teal);
+    background-color: var(--dark-teal);
     color: var(--light-olive);
     flex-basis: 20%;
     flex-shrink: 0;
@@ -77,7 +85,7 @@ body {
 
 /* ------------------------- Main UIs End -------------------------*/
 
-/* nav {
+nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -126,7 +134,7 @@ nav a {
     flex-direction: column;
     row-gap: 8%;
     justify-content: center;
-} */
+}
 
 
 /* Sidebar View */

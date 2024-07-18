@@ -26,5 +26,5 @@ export const auth = {
 			return isLoged;
 		}
 		return false;
-	},
+	}
 };
