@@ -28,3 +28,4 @@ export const auth = {
 		return false;
 	}
 };
+window.Auth = auth;

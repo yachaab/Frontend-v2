@@ -434,33 +434,17 @@ export class Profile extends HTMLElement
             }
         </style>
         <div class="first">
-          <div class="win common">wins: 10 pts</div>
+          <div class="win common">Win Count: ${window.Auth.wins}</div>
           <div class="user common">
               <div class="avatar">
-                <img src="" alt="" />
+                <img src="${window.Auth.avatar}" alt="" />
               </div>
-              <div class="fullname info">fullname</div>
-              <div class="username info">@username</div>
+              <div class="fullname info">${window.Auth.fullname}</div>
+              <div class="username info">@${window.Auth.user}</div>
           </div>
-          <div class="loss common">loss: 0 pts</div>
+          <div class="loss common">Loss Count: ${window.Auth.loss}</div>
         </div>
       `;
-      console.log(window.auth);
-      // const win = this.root.querySelector(".win");
-      // console.log(window.Auth);
-      // win.textContent = `Win Count: ${window.Auth.wins}`;
-  
-      // const loss = this.root.querySelector(".loss");
-      // loss.textContent = `Loss Count: ${window.Auth.loss}`;
-  
-      // const avatar = this.root.querySelector(".avatar img");
-      // avatar.src = window.Auth.avatar;
-  
-      // const fullname = this.root.querySelector(".fullname");
-      // fullname.textContent = `${window.Auth.fullname}`;
-  
-      // const username = this.root.querySelector(".username");
-      // username.textContent = `@${window.Auth.user}`;
     }
 }
 // Platform View

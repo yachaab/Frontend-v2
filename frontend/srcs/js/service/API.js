@@ -2,6 +2,7 @@ const API = {
 	authEndpoint: "http://127.0.0.1:8000/api/",
 	chatEndpoint: "http://127.0.0.1:8000/api/chat/",
 	friendshipEndpoint: "http://127.0.0.1:8000/api/friendship",
+	tictactoeEndpoint: "http://127.0.0.1:8000/TicTacToe/myProfile/",
 
 	// ADD HERE ALL THE OTHER API FUNCTIONS
 	commonPostFunc: async (endPoint, userData ) => {
@@ -71,7 +72,10 @@ const API = {
 	markMessagesAsRead: (room_id) => {
 		API.commonGetFunc( `${API.chatEndpoint}read/${room_id}/` );
 	},
-
+	
+  getTicTacToe: () => {
+    return API.commonGetFunc(`${API.tictactoeEndpoint}`);
+  },
 	makePostRequest: async (url, data) => {
 		const headers = {
 			"Content-Type": "application/json"
